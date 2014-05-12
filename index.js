@@ -1,13 +1,11 @@
 'use strict';
 
-var config = require('./config');
-
 var extend = require('jquery-extend'),
     request = require('request'),
     Promise = require('bluebird'),
     Logger = require('logger');
 
-var log = new Logger('WebAir');
+var log = new Logger('WebAir', 'silly');
 
 module.exports = function WebAir(config) {
     function Client() {
@@ -65,12 +63,13 @@ module.exports = function WebAir(config) {
         log.silly('Request: ', { url: url, method: method });
         var promise = new Promise(function (resolve, reject) {
             request({ url: url, method: method }, function (err, res, body) {
-                if (err) { reject(new Error(err)); }
-                else {
+                if (err) {
+                    reject(new Error(err));
+                } else {
                     try { body = JSON.parse(body); }
                     catch (e) { return reject(new Error('Failed to convert JSON')); }
                     
-                    if (body.status === 'ERROR') { reject(new Error(body.message)); }
+                    if (body.status && body.status.toUpperCase() === 'ERROR') { reject(new Error(body.message || body.error || body)); }
                     else { resolve(body); }
                 }
             });
