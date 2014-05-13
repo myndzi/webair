@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "qs": "git+https://github.com/myndzi/node-querystring.git",
+    "qs": "git+ssh://git@github.com/myndzi/node-querystring.git",
     "jquery-extend": "^2.0.3",
     "bluebird": "^1.2.2",
     "request": "^2.34.0",
-    "logger": "git+https://github.com/myndzi/logger.git"
+    "logger": "git+ssh://git@github.com/myndzi/logger.git"
   }
 }
