@@ -67,7 +67,10 @@ module.exports = function WebAir(config) {
                     reject(new Error(err));
                 } else {
                     try { body = JSON.parse(body); }
-                    catch (e) { return reject(new Error('Failed to convert JSON')); }
+                    catch (e) {
+                        log.warn(e, body);
+                        return reject(new Error('Failed to convert JSON'));
+                    }
                     
                     if (body.status && body.status.toUpperCase() === 'ERROR') { reject(new Error(body.message || body.error || body)); }
                     else { resolve(body); }
