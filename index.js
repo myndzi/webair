@@ -5,9 +5,9 @@ var extend = require('jquery-extend'),
     Promise = require('bluebird'),
     Logger = require('logger');
 
-var log = new Logger('WebAir', 'silly');
+module.exports = function WebAir(config, logger) {
+    var log = logger || new Logger('WebAir', 'silly');
 
-module.exports = function WebAir(config) {
     function Client() {
         this.url = config.url;
         this.apiKey = config.apiKey;
